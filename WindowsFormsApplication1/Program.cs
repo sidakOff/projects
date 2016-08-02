@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+        [STAThread]feFSEFregfreg
         static void Main()
         {
             Application.EnableVisualStyles();
