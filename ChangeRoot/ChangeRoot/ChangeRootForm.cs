@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace ChangeRoot
 {
-    public partial class Form1 : Form
+    public partial class ChangeRootForm : Form
     {
-        public Form1()
+        public ChangeRootForm()
         {
-            InitializeComponent(); ergtergsaerg
+            InitializeComponent();
         }
     }
 }
