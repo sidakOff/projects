@@ -6,48 +6,23 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TelelinkUpload.Properties;
-using UploadProgramm;
 
 namespace TelelinkUpload
 {
     public static class OrderPresenter
     {
+        private static List<Order> orders=new List<Order>();
         public static void DoIt(string ordersNumberText)
         {
             List<string> ordersNumber = ordersNumberText.Split(' ').ToList();
             var results = GetOrderData(ordersNumber);
-            var orders = new List<Order>();
             bool flag = true;
             for (int i = 0; i < results.Rows.Count; i++)
             {
                 var record = results.Rows[i];
                 if (i == 0)
                 {
-                    orders.Add(new Order
-                    {
-                        payerSWIFT = record.ItemArray[0].ToString(),
-                        payerAccountIban = record.ItemArray[1].ToString(),
-                        currency = record.ItemArray[2].ToString(),
-                        summ = Convert.ToDecimal(record.ItemArray[3]),
-                        dateUpload = string.Format(DateTime.Now.ToShortDateString()).Replace(".", "/"),
-                        contract = record.ItemArray[4].ToString(),
-                        note = record.ItemArray[5].ToString(),
-                        beneficiarCompany = record.ItemArray[6].ToString(),
-                        countryBeneficiar = record.ItemArray[7].ToString(),
-                        beneficiarAddress = record.ItemArray[8].ToString(),
-                        beneficiarAccountIban = string.Format(record.ItemArray[9].ToString()).Replace(" ", ""),
-                        beneficiarAccount = string.Format(record.ItemArray[10].ToString()).Replace(" ", ""),
-                        beneficiarSWIFT = record.ItemArray[11].ToString(),
-                        beneficiarBankName = record.ItemArray[12].ToString(),
-                        countryBeneficiarBank = record.ItemArray[13].ToString(),
-                        addressBankBeneficiar = record.ItemArray[14].ToString(),
-                        correspondentSWIFT = record.ItemArray[15].ToString(),
-                        correspondentName = record.ItemArray[16].ToString(),
-                        countryCorrespondent = record.ItemArray[17].ToString(),
-                        correspondentBankAddress = record.ItemArray[18].ToString(),
-                        receiverCompanyCityEng = record.ItemArray[19].ToString(),
-                        brokerSWIFT = record.ItemArray[20].ToString()
-                    });
+                    AddOrder(record);
                 }
                 else
                 {
@@ -71,31 +46,7 @@ namespace TelelinkUpload
                         (prevOrder.correspondentBankAddress == record.ItemArray[18].ToString())
                         & (prevOrder.receiverCompanyCityEng == record.ItemArray[19].ToString()))
                     {
-                        orders.Add(new Order
-                        {
-                            payerSWIFT = record.ItemArray[0].ToString(),
-                            payerAccountIban = record.ItemArray[1].ToString(),
-                            currency = record.ItemArray[2].ToString(),
-                            summ = Convert.ToDecimal(record.ItemArray[3]),
-                            dateUpload = string.Format(DateTime.Now.ToShortDateString()).Replace(".", "/"),
-                            contract = record.ItemArray[4].ToString(),
-                            note = record.ItemArray[5].ToString(),
-                            beneficiarCompany = record.ItemArray[6].ToString(),
-                            countryBeneficiar = record.ItemArray[7].ToString(),
-                            beneficiarAddress = record.ItemArray[8].ToString(),
-                            beneficiarAccountIban = string.Format(record.ItemArray[9].ToString()).Replace(" ", ""),
-                            beneficiarAccount = string.Format(record.ItemArray[10].ToString()).Replace(" ", ""),
-                            beneficiarSWIFT = record.ItemArray[11].ToString(),
-                            beneficiarBankName = record.ItemArray[12].ToString(),
-                            countryBeneficiarBank = record.ItemArray[13].ToString(),
-                            addressBankBeneficiar = record.ItemArray[14].ToString(),
-                            correspondentSWIFT = record.ItemArray[15].ToString(),
-                            correspondentName = record.ItemArray[16].ToString(),
-                            countryCorrespondent = record.ItemArray[17].ToString(),
-                            correspondentBankAddress = record.ItemArray[18].ToString(),
-                            receiverCompanyCityEng = record.ItemArray[19].ToString(),
-                            brokerSWIFT = record.ItemArray[20].ToString()
-                        });
+                        AddOrder(record);
                     }
                     else
                     {
@@ -104,51 +55,12 @@ namespace TelelinkUpload
                     }
                 }
             }
-            /* foreach (var row in results.Rows)
-            {
-                var record = (DataRow) row;
-                orders.Add(new Order
-                {
-                    payerSWIFT = record.ItemArray[0].ToString(),
-                    payerAccountIban = record.ItemArray[1].ToString(),
-                    currency = record.ItemArray[2].ToString(),
-                    summ = Convert.ToDecimal(record.ItemArray[3]),
-                    dateUpload = string.Format(DateTime.Now.ToShortDateString()).Replace(".", "/"),
-                    contract = record.ItemArray[4].ToString(),
-                    note = record.ItemArray[5].ToString(),
-                    beneficiarCompany = record.ItemArray[6].ToString(),
-                    countryBeneficiar = record.ItemArray[7].ToString(),
-                    beneficiarAddress = record.ItemArray[8].ToString(),
-                    beneficiarAccountIban = string.Format(record.ItemArray[9].ToString()).Replace(" ", ""),
-                    beneficiarAccount = string.Format(record.ItemArray[10].ToString()).Replace(" ", ""),
-                    beneficiarSWIFT = record.ItemArray[11].ToString(),
-                    beneficiarBankName = record.ItemArray[12].ToString(),
-                    countryBeneficiarBank = record.ItemArray[13].ToString(),
-                    addressBankBeneficiar = record.ItemArray[14].ToString(),
-                    correspondentSWIFT = record.ItemArray[15].ToString(),
-                    correspondentName = record.ItemArray[16].ToString(),
-                    countryCorrespondent = record.ItemArray[17].ToString(),
-                    correspondentBankAddress = record.ItemArray[18].ToString(),
-                    receiverCompanyCityEng = record.ItemArray[19].ToString(),
-                    brokerSWIFT = record.ItemArray[20].ToString()
-                });
-            }*/
+            
             if (flag)
             {
                 var order = orders.FirstOrDefault();
                 var sum = orders.Sum(o => o.summ);
-                if (!string.IsNullOrEmpty(order.countryBeneficiar))
-                {
-                    order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
-                }
-                if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
-                {
-                    order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
-                }
-                if (!string.IsNullOrEmpty(order.countryCorrespondent))
-                {
-                    order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
-                }
+                order=PrepareValues(order);
 
                 var upload =
                     string.Format(
@@ -201,10 +113,65 @@ namespace TelelinkUpload
             }
         }
 
-        private static DataTable GetOrderData(List<string> orders)
+        private static Order PrepareValues(Order order)
+        {
+            if (!string.IsNullOrEmpty(order.countryBeneficiar))
+            {
+                order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
+            }
+            if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
+            {
+                order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
+            }
+            if (!string.IsNullOrEmpty(order.countryCorrespondent))
+            {
+                order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
+            }
+            if (!string.IsNullOrEmpty(order.beneficiarAccount))
+            {
+                order.beneficiarAccount = string.Format(order.beneficiarAccount).Replace(" ", "");
+            }
+            if (!string.IsNullOrEmpty(order.beneficiarAccountIban))
+            {
+                order.beneficiarAccountIban = string.Format(order.beneficiarAccountIban).Replace(" ", "");
+            }
+
+            return order;
+        }
+
+        private static void AddOrder(DataRow record)
+        {
+            orders.Add(new Order
+            {
+                payerSWIFT = record.ItemArray[0].ToString(),
+                payerAccountIban = record.ItemArray[1].ToString(),
+                currency = record.ItemArray[2].ToString(),
+                summ = Convert.ToDecimal(record.ItemArray[3]),
+                dateUpload = string.Format(DateTime.Now.ToShortDateString()).Replace(".", "/"),
+                contract = record.ItemArray[4].ToString(),
+                note = record.ItemArray[5].ToString(),
+                beneficiarCompany = record.ItemArray[6].ToString(),
+                countryBeneficiar = record.ItemArray[7].ToString(),
+                beneficiarAddress = record.ItemArray[8].ToString(),
+                beneficiarAccountIban = record.ItemArray[9].ToString(),
+                beneficiarAccount = record.ItemArray[10].ToString(),
+                beneficiarSWIFT = record.ItemArray[11].ToString(),
+                beneficiarBankName = record.ItemArray[12].ToString(),
+                countryBeneficiarBank = record.ItemArray[13].ToString(),
+                addressBankBeneficiar = record.ItemArray[14].ToString(),
+                correspondentSWIFT = record.ItemArray[15].ToString(),
+                correspondentName = record.ItemArray[16].ToString(),
+                countryCorrespondent = record.ItemArray[17].ToString(),
+                correspondentBankAddress = record.ItemArray[18].ToString(),
+                receiverCompanyCityEng = record.ItemArray[19].ToString(),
+                brokerSWIFT = record.ItemArray[20].ToString()
+            });
+        }
+
+        private static DataTable GetOrderData(List<string> ordersData)
         {
             var results = new DataTable();
-            foreach (var order in orders)
+            foreach (var order in ordersData)
             {
                 using (var conn = new SqlConnection(Settings.Default.ConnecitionString))
                 {
