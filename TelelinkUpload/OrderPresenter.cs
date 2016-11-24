@@ -137,17 +137,44 @@ namespace TelelinkUpload
             {
                 var order = orders.FirstOrDefault();
                 var sum = orders.Sum(o => o.summ);
+                if (!string.IsNullOrEmpty(order.countryBeneficiar))
+                {
+                    order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
+                }
+                if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
+                {
+                    order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
+                }
+                if (!string.IsNullOrEmpty(order.countryCorrespondent))
+                {
+                    order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
+                }
 
                 var upload =
-                   string.Format(
-                       @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};",
-                       order.payerSWIFT, order.payerAccountIban, order.currency, string.Format(sum.ToString()).Replace(",", "."), order.dateUpload, order.contract, order.note,
-                       order.beneficiarCompany, string.Format(order.countryBeneficiar).Remove(2), order.beneficiarAddress,
-                       string.IsNullOrWhiteSpace(order.beneficiarAccountIban) ? order.beneficiarAccount : order.beneficiarAccountIban
-                       , order.beneficiarSWIFT,
-                       order.beneficiarBankName, string.Format(order.countryBeneficiarBank).Remove(2), order.addressBankBeneficiar,
-                       order.correspondentSWIFT, order.correspondentName, string.Format(order.countryCorrespondent).Remove(2),
-                       order.correspondentBankAddress, order.receiverCompanyCityEng, order.brokerSWIFT);
+                    string.Format(
+                        @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};",
+                        order.payerSWIFT,
+                        order.payerAccountIban, 
+                        order.currency,
+                        string.Format(sum.ToString()).Replace(",", "."), 
+                        order.dateUpload, 
+                        order.contract, 
+                        order.note,
+                        order.beneficiarCompany,
+                        order.countryBeneficiar,
+                        order.beneficiarAddress,
+                        string.IsNullOrWhiteSpace(order.beneficiarAccountIban)
+                            ? order.beneficiarAccount
+                           : order.beneficiarAccountIban, 
+                        order.beneficiarSWIFT,
+                        order.beneficiarBankName,
+                        order.countryBeneficiarBank,
+                        order.addressBankBeneficiar,
+                        order.correspondentSWIFT, 
+                        order.correspondentName,
+                         order.countryCorrespondent,
+                        order.correspondentBankAddress, 
+                        order.receiverCompanyCityEng, order.brokerSWIFT);
 #if DEBUG
                 upload = string.Format(upload).Replace(";", ";" + Environment.NewLine);
 #endif
@@ -172,7 +199,6 @@ namespace TelelinkUpload
                 }
                 MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
             }
-           
         }
 
         private static DataTable GetOrderData(List<string> orders)
@@ -210,6 +236,7 @@ namespace TelelinkUpload
             from wh_ForeignPayment ord where iOrderID={0}", order);
 
                     #endregion
+
                     using (var command = new SqlCommand(query, conn))
                     using (var dataAdapter = new SqlDataAdapter(command))
                         dataAdapter.Fill(results);
