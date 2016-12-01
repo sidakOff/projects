@@ -64,7 +64,7 @@ namespace TelelinkUpload
 
                 var upload =
                     string.Format(
-                        @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};",
+                        @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};{20};",
                         order.payerSWIFT,
                         order.payerAccountIban, 
                         order.currency,
@@ -111,6 +111,7 @@ namespace TelelinkUpload
                 }
                 MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
             }
+            orders.Clear();
         }
 
         private static Order PrepareValues(Order order)
@@ -134,6 +135,10 @@ namespace TelelinkUpload
             if (!string.IsNullOrEmpty(order.beneficiarAccountIban))
             {
                 order.beneficiarAccountIban = string.Format(order.beneficiarAccountIban).Replace(" ", "");
+            }
+            if (!string.IsNullOrEmpty(order.brokerSWIFT))
+            {
+                order.brokerSWIFT = string.Format("/IBK/{0}", order.brokerSWIFT);
             }
 
             return order;

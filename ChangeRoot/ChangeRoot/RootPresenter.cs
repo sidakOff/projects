@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ChangeRoot.Properties;
 
 namespace ChangeRoot
@@ -31,13 +29,14 @@ namespace ChangeRoot
             foreach (var row in results.Rows)
             {
                var user = (DataRow)row;
-               users.Add(new User()
-                {
+               users.Add(new User
+               {
                     UserId = Convert.ToInt32(user.ItemArray[0]),
                     LogIn = user.ItemArray[2].ToString(),
                     Name = user.ItemArray[1].ToString()
                 });
             }
+            users = users.OrderBy(o => o.Name).ToList();
             return users;
         }
 
@@ -64,7 +63,7 @@ namespace ChangeRoot
             foreach (var row in results.Rows)
             {
                 var route = (DataRow) row;
-                routes.Add(new Route()
+                routes.Add(new Route
                 {
                     RouteId = Convert.ToInt32(route.ItemArray[0]),
                     RouteName = route.ItemArray[1].ToString()

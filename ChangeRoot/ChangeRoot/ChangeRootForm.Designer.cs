@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.routeDataGridView = new System.Windows.Forms.DataGridView();
+            this.RouteName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.routeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.userComboBox = new System.Windows.Forms.ComboBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.routeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.RouteName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.routeDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -77,6 +77,14 @@
             this.routeDataGridView.Size = new System.Drawing.Size(485, 270);
             this.routeDataGridView.TabIndex = 0;
             // 
+            // RouteName
+            // 
+            this.RouteName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.RouteName.DataPropertyName = "RouteName";
+            this.RouteName.HeaderText = "Маршрут";
+            this.RouteName.Name = "RouteName";
+            this.RouteName.ReadOnly = true;
+            // 
             // userComboBox
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.userComboBox, 3);
@@ -89,14 +97,6 @@
             this.userComboBox.TabIndex = 4;
             this.userComboBox.SelectedIndexChanged += new System.EventHandler(this.userComboBox_SelectedIndexChanged);
             // 
-            // RouteName
-            // 
-            this.RouteName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.RouteName.DataPropertyName = "RouteName";
-            this.RouteName.HeaderText = "Маршрут";
-            this.RouteName.Name = "RouteName";
-            this.RouteName.ReadOnly = true;
-            // 
             // ChangeRootForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,8 +107,8 @@
             this.Text = "Права пользователей";
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.routeDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
