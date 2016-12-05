@@ -7,8 +7,8 @@
         public string currency { get; set; }
         public decimal summ { get; set; }
         public string dateUpload { get; set; }
-        public string contract { get; set; }
-        public string note { get; set; }
+        public string paymentDestination { get; set; }
+        public string paymentCoverage { get; set; }
         public string beneficiarCompany { get; set; }
         public string countryBeneficiar { get; set; }
         public string beneficiarAddress { get; set; }

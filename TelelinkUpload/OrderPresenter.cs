@@ -11,7 +11,8 @@ namespace TelelinkUpload
 {
     public static class OrderPresenter
     {
-        private static List<Order> orders=new List<Order>();
+        private static List<Order> orders = new List<Order>();
+
         public static void DoIt(string ordersNumberText)
         {
             List<string> ordersNumber = ordersNumberText.Split(' ').ToList();
@@ -30,7 +31,7 @@ namespace TelelinkUpload
                     if ((prevOrder.payerSWIFT == record.ItemArray[0].ToString()) &
                         (prevOrder.payerAccountIban == record.ItemArray[1].ToString()) &
                         (prevOrder.currency == record.ItemArray[2].ToString())
-                        & (prevOrder.contract == record.ItemArray[4].ToString()) &
+                        & (prevOrder.paymentDestination == record.ItemArray[4].ToString()) &
                         (prevOrder.beneficiarCompany == record.ItemArray[6].ToString())
                         & (prevOrder.countryBeneficiar == record.ItemArray[7].ToString()) &
                         (prevOrder.beneficiarAddress == record.ItemArray[8].ToString())
@@ -55,37 +56,37 @@ namespace TelelinkUpload
                     }
                 }
             }
-            
+
             if (flag)
             {
                 var order = orders.FirstOrDefault();
                 var sum = orders.Sum(o => o.summ);
-                order=PrepareValues(order);
+                order = PrepareValues(order);
 
                 var upload =
                     string.Format(
                         @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};{20};",
                         order.payerSWIFT,
-                        order.payerAccountIban, 
+                        order.payerAccountIban,
                         order.currency,
-                        string.Format(sum.ToString()).Replace(",", "."), 
-                        order.dateUpload, 
-                        order.contract, 
-                        order.note,
+                        string.Format(sum.ToString()).Replace(",", "."),
+                        order.dateUpload,
+                        order.paymentDestination,
+                        order.paymentCoverage,
                         order.beneficiarCompany,
                         order.countryBeneficiar,
                         order.beneficiarAddress,
                         string.IsNullOrWhiteSpace(order.beneficiarAccountIban)
                             ? order.beneficiarAccount
-                           : order.beneficiarAccountIban, 
+                            : order.beneficiarAccountIban,
                         order.beneficiarSWIFT,
                         order.beneficiarBankName,
                         order.countryBeneficiarBank,
                         order.addressBankBeneficiar,
-                        order.correspondentSWIFT, 
+                        order.correspondentSWIFT,
                         order.correspondentName,
-                         order.countryCorrespondent,
-                        order.correspondentBankAddress, 
+                        order.countryCorrespondent,
+                        order.correspondentBankAddress,
                         order.receiverCompanyCityEng, order.brokerSWIFT);
 #if DEBUG
                 upload = string.Format(upload).Replace(";", ";" + Environment.NewLine);
@@ -128,6 +129,10 @@ namespace TelelinkUpload
             {
                 order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
             }
+            if (!string.IsNullOrEmpty(order.payerAccountIban))
+            {
+                order.payerAccountIban = string.Format(order.payerAccountIban).Replace(" ", "");
+            }
             if (!string.IsNullOrEmpty(order.beneficiarAccount))
             {
                 order.beneficiarAccount = string.Format(order.beneficiarAccount).Replace(" ", "");
@@ -148,28 +153,28 @@ namespace TelelinkUpload
         {
             orders.Add(new Order
             {
-                payerSWIFT = record.ItemArray[0].ToString(),
-                payerAccountIban = record.ItemArray[1].ToString(),
-                currency = record.ItemArray[2].ToString(),
-                summ = Convert.ToDecimal(record.ItemArray[3]),
+                payerSWIFT = record.Field<string>("PayerBankSwiftCode"), //record.ItemArray[0].ToString(),
+                payerAccountIban = record.Field<string>("PayerAccountIban"),
+                currency = record.Field<string>("CurrencyIsoCode"),
+                summ = record.Field<decimal>("Amount"),
                 dateUpload = string.Format(DateTime.Now.ToShortDateString()).Replace(".", "/"),
-                contract = record.ItemArray[4].ToString(),
-                note = record.ItemArray[5].ToString(),
-                beneficiarCompany = record.ItemArray[6].ToString(),
-                countryBeneficiar = record.ItemArray[7].ToString(),
-                beneficiarAddress = record.ItemArray[8].ToString(),
-                beneficiarAccountIban = record.ItemArray[9].ToString(),
-                beneficiarAccount = record.ItemArray[10].ToString(),
-                beneficiarSWIFT = record.ItemArray[11].ToString(),
-                beneficiarBankName = record.ItemArray[12].ToString(),
-                countryBeneficiarBank = record.ItemArray[13].ToString(),
-                addressBankBeneficiar = record.ItemArray[14].ToString(),
-                correspondentSWIFT = record.ItemArray[15].ToString(),
-                correspondentName = record.ItemArray[16].ToString(),
-                countryCorrespondent = record.ItemArray[17].ToString(),
-                correspondentBankAddress = record.ItemArray[18].ToString(),
-                receiverCompanyCityEng = record.ItemArray[19].ToString(),
-                brokerSWIFT = record.ItemArray[20].ToString()
+                paymentDestination = record.Field<string>("PaymentDestination"),
+                paymentCoverage = record.Field<string>("PaymentCoverage"),
+                beneficiarCompany = record.Field<string>("ReceiverCompanyNameEng"),
+                countryBeneficiar = record.Field<string>("ReceiverCompanyCountryCodeAlpha3"),
+                beneficiarAddress = record.Field<string>("ReceiverCompanyAddressEng"),
+                beneficiarAccountIban = record.Field<string>("ReceiverAccountIban"),
+                beneficiarAccount = record.Field<string>("ReceiverAccount"),
+                beneficiarSWIFT = record.Field<string>("ReceiverBankSwiftCode"),
+                beneficiarBankName = record.Field<string>("ReceiverBankNameEng"),
+                countryBeneficiarBank = record.Field<string>("ReceiverBankCountryCodeAlpha3"),
+                addressBankBeneficiar = record.Field<string>("ReceiverBankAddressEng"),
+                correspondentSWIFT = record.Field<string>("CorrBankSwiftCode"),
+                correspondentName = record.Field<string>("CorrBankNameEng"),
+                countryCorrespondent = record.Field<string>("CorrBankCountryCodeAlpha3"),
+                correspondentBankAddress = record.Field<string>("CorrBankAddressEng"),
+                receiverCompanyCityEng = record.Field<string>("ReceiverCompanyCityEng"),
+                brokerSWIFT = record.Field<string>("IntCorrBankSwiftCode")
             });
         }
 
@@ -184,27 +189,27 @@ namespace TelelinkUpload
 
                     string query = string.Format(@"
             select 
-                ord.vcPayerBankSwiftCode,
-                ord.vcPayerAccountIban,
-                ord.vcCurrencyIsoCode,
-                ord.mAmount,
-                ord.vcAgreementName,
-                ord.vcPaymentCoverage,
-                ord.vcReceiverCompanyNameEng,
-                ord.vcReceiverCompanyCountryCodeAlpha3,
-                ord.vcReceiverCompanyAddressEng,
-                ord.vcReceiverAccountIban,
-                ord.vcReceiverAccount,
-                ord.vcReceiverBankSwiftCode,
-                ord.vcReceiverBankNameEng,
-                ord.vcReceiverBankCountryCodeAlpha3,
-                ord.vcReceiverBankAddressEng,
-                ord.vcCorrBankSwiftCode,
-                ord.vcCorrBankNameEng,
-                ord.vcCorrBankCountryCodeAlpha3,
-                ord.vcCorrBankAddressEng,
-                ord.vcReceiverCompanyCityEng,
-                ord.vcIntCorrBankSwiftCode	
+                ord.vcPayerBankSwiftCode as PayerBankSwiftCode,
+                ord.vcPayerAccountIban as PayerAccountIban,
+                ord.vcCurrencyIsoCode as CurrencyIsoCode,
+                ord.mAmount as Amount,
+                ord.vcPaymentDestination as PaymentDestination,
+                ord.vcPaymentCoverage as PaymentCoverage,
+                ord.vcReceiverCompanyNameEng as ReceiverCompanyNameEng,
+                ord.vcReceiverCompanyCountryCodeAlpha3 as ReceiverCompanyCountryCodeAlpha3,
+                ord.vcReceiverCompanyAddressEng as ReceiverCompanyAddressEng,
+                ord.vcReceiverAccountIban as ReceiverAccountIban,
+                ord.vcReceiverAccount as ReceiverAccount,
+                ord.vcReceiverBankSwiftCode as ReceiverBankSwiftCode,
+                ord.vcReceiverBankNameEng as ReceiverBankNameEng,
+                ord.vcReceiverBankCountryCodeAlpha3 as ReceiverBankCountryCodeAlpha3,
+                ord.vcReceiverBankAddressEng as ReceiverBankAddressEng,
+                ord.vcCorrBankSwiftCode as CorrBankSwiftCode,
+                ord.vcCorrBankNameEng as CorrBankNameEng,
+                ord.vcCorrBankCountryCodeAlpha3 as CorrBankCountryCodeAlpha3,
+                ord.vcCorrBankAddressEng as CorrBankAddressEng,
+                ord.vcReceiverCompanyCityEng as ReceiverCompanyCityEng,
+                ord.vcIntCorrBankSwiftCode as IntCorrBankSwiftCode	
             from wh_ForeignPayment ord where iOrderID={0}", order);
 
                     #endregion
