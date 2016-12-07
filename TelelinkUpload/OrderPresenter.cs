@@ -31,7 +31,7 @@ namespace TelelinkUpload
                     if ((prevOrder.payerSWIFT == record.ItemArray[0].ToString()) &
                         (prevOrder.payerAccountIban == record.ItemArray[1].ToString()) &
                         (prevOrder.currency == record.ItemArray[2].ToString())
-                        & (prevOrder.paymentDestination == record.ItemArray[4].ToString()) &
+                         &
                         (prevOrder.beneficiarCompany == record.ItemArray[6].ToString())
                         & (prevOrder.countryBeneficiar == record.ItemArray[7].ToString()) &
                         (prevOrder.beneficiarAddress == record.ItemArray[8].ToString())
@@ -153,7 +153,7 @@ namespace TelelinkUpload
         {
             orders.Add(new Order
             {
-                payerSWIFT = record.Field<string>("PayerBankSwiftCode"), //record.ItemArray[0].ToString(),
+                payerSWIFT = record.Field<string>("PayerBankSwiftCode"),
                 payerAccountIban = record.Field<string>("PayerAccountIban"),
                 currency = record.Field<string>("CurrencyIsoCode"),
                 summ = record.Field<decimal>("Amount"),
