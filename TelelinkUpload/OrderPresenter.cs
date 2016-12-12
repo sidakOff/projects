@@ -4,7 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
+using KellermanSoftware.CompareNetObjects;
 using TelelinkUpload.Properties;
 
 namespace TelelinkUpload
@@ -13,56 +15,40 @@ namespace TelelinkUpload
     {
         private static List<Order> orders = new List<Order>();
 
+        /// <summary>
+        /// Грузим заявки в тхт файл
+        /// </summary>
+        /// <param name="ordersNumberText"></param>
         public static void DoIt(string ordersNumberText)
         {
+            var flag = true;
             List<string> ordersNumber = ordersNumberText.Split(' ').ToList();
             var results = GetOrderData(ordersNumber);
-            bool flag = true;
-            for (int i = 0; i < results.Rows.Count; i++)
+            foreach (var record in results.Rows)
             {
-                var record = results.Rows[i];
-                if (i == 0)
+                AddOrder(record as DataRow);
+            }
+
+            if (orders.Count > 1)
+            {
+                for (int i = 0; i < orders.Count; i++)
                 {
-                    AddOrder(record);
-                }
-                else
-                {
-                    var prevOrder = orders.FirstOrDefault();
-                    if ((prevOrder.payerSWIFT == record.ItemArray[0].ToString()) &
-                        (prevOrder.payerAccountIban == record.ItemArray[1].ToString()) &
-                        (prevOrder.currency == record.ItemArray[2].ToString())
-                         &
-                        (prevOrder.beneficiarCompany == record.ItemArray[6].ToString())
-                        & (prevOrder.countryBeneficiar == record.ItemArray[7].ToString()) &
-                        (prevOrder.beneficiarAddress == record.ItemArray[8].ToString())
-                        & (prevOrder.beneficiarAccountIban == record.ItemArray[9].ToString()) &
-                        (prevOrder.beneficiarAccount == record.ItemArray[10].ToString())
-                        & (prevOrder.beneficiarSWIFT == record.ItemArray[11].ToString()) &
-                        (prevOrder.beneficiarBankName == record.ItemArray[12].ToString())
-                        & (prevOrder.countryBeneficiarBank == record.ItemArray[13].ToString()) &
-                        (prevOrder.addressBankBeneficiar == record.ItemArray[14].ToString())
-                        & (prevOrder.correspondentSWIFT == record.ItemArray[15].ToString()) &
-                        (prevOrder.correspondentName == record.ItemArray[16].ToString())
-                        & (prevOrder.countryCorrespondent == record.ItemArray[17].ToString()) &
-                        (prevOrder.correspondentBankAddress == record.ItemArray[18].ToString())
-                        & (prevOrder.receiverCompanyCityEng == record.ItemArray[19].ToString()))
+                    if (i > 0)
                     {
-                        AddOrder(record);
-                    }
-                    else
-                    {
-                        flag = false;
-                        MessageBox.Show("Заявки имеют разные реквизиты");
+                        if (!CompareOrders(orders[0], orders[i]))
+                        {
+                            MessageBox.Show("Заявки имеют разные реквизиты");
+                            flag = false;
+                        }
                     }
                 }
             }
 
             if (flag)
             {
-                var order = orders.FirstOrDefault();
-                var sum = orders.Sum(o => o.summ);
+                var order = orders.FirstOrDefault(); // если заявок несколько, то значит пользователь грузит в одну, 
+                var sum = orders.Sum(o => o.summ); //где реквизиты одни и те же, а суммы складываются
                 order = PrepareValues(order);
-
                 var upload =
                     string.Format(
                         @"{0};{1};{2};{3};{4};{5} ; ;{6};{7};{8};{9}; ;;{10} ;{11};{12};{13};{14}; ; ;{15};{16};{17};{18} ; ;4;1;{19};{20};",
@@ -90,45 +76,74 @@ namespace TelelinkUpload
                         order.receiverCompanyCityEng, order.brokerSWIFT);
 #if DEBUG
                 upload = string.Format(upload).Replace(";", ";" + Environment.NewLine);
+                    // раскидываем по полям в столбик
 #endif
-                string path = @"C:\Work\UploadToTelelinkFiles";
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                path = string.Format(@"C:\Work\UploadToTelelinkFiles\{0}.txt", ordersNumberText); //todo 
-                if (!File.Exists(path))
-                {
-                    File.Create(path).Dispose();
-                    TextWriter tw = new StreamWriter(path);
-                    tw.Write(upload);
-                    tw.Close();
-                }
-                else if (File.Exists(path))
-                {
-                    TextWriter tw = new StreamWriter(path, false);
-                    tw.Write(upload);
-                    tw.Close();
-                }
-                MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
+
+                WriteToFile(ordersNumberText, upload);
             }
-            orders.Clear();
+            orders.Clear(); // чистим список от предыдущих заявок
         }
 
+        private static bool CompareOrders(Order firstOrder, Order order)
+        {
+            var e=new CompareLogic();
+            e.Config= new ComparisonConfig
+            {
+                MembersToIgnore = new List<string> { "summ", "paymentDestination" }
+            };
+            var result=e.Compare(firstOrder, order).AreEqual;
+            
+            return result;
+        }
+
+        /// <summary>
+        /// Пишем в файл
+        /// </summary>
+        /// <param name="ordersNumberText"></param>
+        /// <param name="upload"></param>
+        private static void WriteToFile(string ordersNumberText, string upload)
+        {
+            string path = @"C:\Work\UploadToTelelinkFiles";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path = string.Format(@"C:\Work\UploadToTelelinkFiles\{0}.txt", ordersNumberText); //todo 
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+                TextWriter tw = new StreamWriter(path);
+                tw.Write(upload);
+                tw.Close();
+            }
+            else if (File.Exists(path))
+            {
+                TextWriter tw = new StreamWriter(path, false);
+                tw.Write(upload);
+                tw.Close();
+            }
+            MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
+        }
+
+        /// <summary>
+        /// Проводим подготовку полей для записи в файл
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         private static Order PrepareValues(Order order)
         {
-            if (!string.IsNullOrEmpty(order.countryBeneficiar))
-            {
-                order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
-            }
-            if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
-            {
-                order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
-            }
-            if (!string.IsNullOrEmpty(order.countryCorrespondent))
-            {
-                order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
-            }
+            //if (!string.IsNullOrEmpty(order.countryBeneficiar))
+            //{
+            //    order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
+            //}
+            //if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
+            //{
+            //    order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
+            //}
+            //if (!string.IsNullOrEmpty(order.countryCorrespondent))
+            //{
+            //    order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
+            //}
             if (!string.IsNullOrEmpty(order.payerAccountIban))
             {
                 order.payerAccountIban = string.Format(order.payerAccountIban).Replace(" ", "");
@@ -145,10 +160,18 @@ namespace TelelinkUpload
             {
                 order.brokerSWIFT = string.Format("/IBK/{0}", order.brokerSWIFT);
             }
+            if (!string.IsNullOrEmpty(order.paymentDestination))
+            {
+                order.paymentDestination = string.Format(order.paymentDestination).Replace("   ", "");
+            }
 
             return order;
         }
 
+        /// <summary>
+        /// Добавляем заявку в список заявок
+        /// </summary>
+        /// <param name="record"></param>
         private static void AddOrder(DataRow record)
         {
             orders.Add(new Order
@@ -178,6 +201,11 @@ namespace TelelinkUpload
             });
         }
 
+        /// <summary>
+        /// Получаем данные по заявке
+        /// </summary>
+        /// <param name="ordersData"></param>
+        /// <returns></returns>
         private static DataTable GetOrderData(List<string> ordersData)
         {
             var results = new DataTable();
@@ -196,21 +224,23 @@ namespace TelelinkUpload
                 ord.vcPaymentDestination as PaymentDestination,
                 ord.vcPaymentCoverage as PaymentCoverage,
                 ord.vcReceiverCompanyNameEng as ReceiverCompanyNameEng,
-                ord.vcReceiverCompanyCountryCodeAlpha3 as ReceiverCompanyCountryCodeAlpha3,
+                c.vcCodeAlpha2 as ReceiverCompanyCountryCodeAlpha3,
                 ord.vcReceiverCompanyAddressEng as ReceiverCompanyAddressEng,
                 ord.vcReceiverAccountIban as ReceiverAccountIban,
                 ord.vcReceiverAccount as ReceiverAccount,
                 ord.vcReceiverBankSwiftCode as ReceiverBankSwiftCode,
                 ord.vcReceiverBankNameEng as ReceiverBankNameEng,
-                ord.vcReceiverBankCountryCodeAlpha3 as ReceiverBankCountryCodeAlpha3,
+                c1.vcCodeAlpha2 as ReceiverBankCountryCodeAlpha3,
                 ord.vcReceiverBankAddressEng as ReceiverBankAddressEng,
                 ord.vcCorrBankSwiftCode as CorrBankSwiftCode,
                 ord.vcCorrBankNameEng as CorrBankNameEng,
-                ord.vcCorrBankCountryCodeAlpha3 as CorrBankCountryCodeAlpha3,
+                c2.vcCodeAlpha2 as CorrBankCountryCodeAlpha3,
                 ord.vcCorrBankAddressEng as CorrBankAddressEng,
                 ord.vcReceiverCompanyCityEng as ReceiverCompanyCityEng,
                 ord.vcIntCorrBankSwiftCode as IntCorrBankSwiftCode	
-            from wh_ForeignPayment ord where iOrderID={0}", order);
+            from wh_ForeignPayment ord left join dbo.dic_Country c on ord.iReceiverCompanyCountryID=c.iCountryID
+            left join dbo.dic_Country c1 on ord.iReceiverBankCountryID=c1.iCountryID
+            left join dbo.dic_Country c2 on ord.iCorrBankCountryID=c2.iCountryID where iOrderID={0}", order);
 
                     #endregion
 
