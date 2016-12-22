@@ -11,7 +11,6 @@ namespace ChangeRoot
     {
         public int RouteId { get; set; }
 
-        [DisplayName("RouteName")]
         public string RouteName { get; set; }
     }
 }

@@ -31,9 +31,9 @@ namespace ChangeRoot
                var user = (DataRow)row;
                users.Add(new User
                {
-                    UserId = Convert.ToInt32(user.ItemArray[0]),
-                    LogIn = user.ItemArray[2].ToString(),
-                    Name = user.ItemArray[1].ToString()
+                    UserId = user.Field<int>("UserId"),
+                    Name = user.Field<string>("Name"),
+                    LogIn = user.Field<string>("LogName")
                 });
             }
             users = users.OrderBy(o => o.Name).ToList();
@@ -48,8 +48,8 @@ namespace ChangeRoot
             {
                 string query = $@"
                         select 
-	                        r.iRouteID,
-	                        r.vcName,
+	                        r.iRouteID as RouteId,
+	                        r.vcName as Name,
 	                        ru.iRouteGroupID
                         from
                             dic_Route r 
@@ -65,8 +65,8 @@ namespace ChangeRoot
                 var route = (DataRow) row;
                 routes.Add(new Route
                 {
-                    RouteId = Convert.ToInt32(route.ItemArray[0]),
-                    RouteName = route.ItemArray[1].ToString()
+                    RouteId = route.Field<int>("RouteId"),
+                    RouteName = route.Field<string>("Name")
                 });
             }
             return routes;

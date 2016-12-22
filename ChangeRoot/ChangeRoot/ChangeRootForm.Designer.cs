@@ -30,15 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.routeDataGridView = new System.Windows.Forms.DataGridView();
+            this.routesGridView = new System.Windows.Forms.DataGridView();
             this.RouteName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.routeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.userComboBox = new System.Windows.Forms.ComboBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rightsGridView = new System.Windows.Forms.DataGridView();
+            this.rightsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.routeDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.routesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -48,8 +52,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.routeDataGridView, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.routesGridView, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.userComboBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rightsGridView, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -60,22 +65,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(491, 321);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // routeDataGridView
+            // routesGridView
             // 
-            this.routeDataGridView.AllowUserToAddRows = false;
-            this.routeDataGridView.AllowUserToDeleteRows = false;
-            this.routeDataGridView.AutoGenerateColumns = false;
-            this.routeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.routeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.routesGridView.AllowUserToAddRows = false;
+            this.routesGridView.AllowUserToDeleteRows = false;
+            this.routesGridView.AutoGenerateColumns = false;
+            this.routesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.routesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RouteName});
-            this.tableLayoutPanel1.SetColumnSpan(this.routeDataGridView, 4);
-            this.routeDataGridView.DataSource = this.routeBindingSource;
-            this.routeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.routeDataGridView.Location = new System.Drawing.Point(3, 27);
-            this.routeDataGridView.Name = "routeDataGridView";
-            this.routeDataGridView.ReadOnly = true;
-            this.routeDataGridView.Size = new System.Drawing.Size(485, 270);
-            this.routeDataGridView.TabIndex = 0;
+            this.tableLayoutPanel1.SetColumnSpan(this.routesGridView, 2);
+            this.routesGridView.DataSource = this.routeBindingSource;
+            this.routesGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.routesGridView.Location = new System.Drawing.Point(3, 27);
+            this.routesGridView.Name = "routesGridView";
+            this.routesGridView.ReadOnly = true;
+            this.routesGridView.Size = new System.Drawing.Size(238, 270);
+            this.routesGridView.TabIndex = 0;
+            this.routesGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.routesGridView_CellClick);
             // 
             // RouteName
             // 
@@ -97,6 +103,18 @@
             this.userComboBox.TabIndex = 4;
             this.userComboBox.SelectedIndexChanged += new System.EventHandler(this.userComboBox_SelectedIndexChanged);
             // 
+            // rightsGridView
+            // 
+            this.rightsGridView.AutoGenerateColumns = false;
+            this.rightsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableLayoutPanel1.SetColumnSpan(this.rightsGridView, 2);
+            this.rightsGridView.DataSource = this.rightsBindingSource;
+            this.rightsGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightsGridView.Location = new System.Drawing.Point(247, 27);
+            this.rightsGridView.Name = "rightsGridView";
+            this.rightsGridView.Size = new System.Drawing.Size(241, 270);
+            this.rightsGridView.TabIndex = 5;
+            // 
             // ChangeRootForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -106,9 +124,11 @@
             this.Name = "ChangeRootForm";
             this.Text = "Права пользователей";
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.routeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.routesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.routeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -116,11 +136,13 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView routeDataGridView;
+        private System.Windows.Forms.DataGridView routesGridView;
         private System.Windows.Forms.ComboBox userComboBox;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.BindingSource routeBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn RouteName;
+        private System.Windows.Forms.DataGridView rightsGridView;
+        private System.Windows.Forms.BindingSource rightsBindingSource;
     }
 }
 

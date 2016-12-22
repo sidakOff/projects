@@ -30,9 +30,15 @@ namespace ChangeRoot
 
         private void userComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            User x = (User) userComboBox.SelectedItem;
-            userId = x.UserId;
+            User user = (User) userComboBox.SelectedItem;
+            userId = user.UserId;
             routeBindingSource.DataSource = presenter.GetUserRoutes(userId);
+        }
+
+        private void routesGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var route = (Route)routeBindingSource.Current;
+            var routeId = route.RouteId;
         }
     }
 }
