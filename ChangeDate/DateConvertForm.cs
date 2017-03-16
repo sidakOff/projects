@@ -18,7 +18,6 @@ namespace ChangeDate
         public dateConvertForm()
         {
             InitializeComponent();
-
         }
 
         private void pathButton_Click(object sender, EventArgs e)
@@ -27,81 +26,70 @@ namespace ChangeDate
             theDialog.Title = "Open Text File";
             theDialog.Filter = "TXT files|*.txt";
             theDialog.InitialDirectory = @"C:\";
-            string text;
-            text = "";
+            theDialog.Multiselect = true;
+            var text = "";
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
-                var fileName = theDialog.FileName; const Int32 BufferSize = 128;
-                using (var fileStream = File.OpenRead(fileName))
-                using (var streamReader = new StreamReader(fileStream, Encoding.Default, true, BufferSize))
+                var fileNames = theDialog.FileNames;
+                const Int32 BufferSize = 128;
+                foreach (var fileName in fileNames)
                 {
-                    String line;
-                    while ((line = streamReader.ReadLine()) != null)
+                    using (var fileStream = File.OpenRead(fileName))
+                    using (var streamReader = new StreamReader(fileStream, Encoding.Default, true, BufferSize))
                     {
-                        //line=string.Format(line).Contains                        
-                        text = text + line;
-                    }
-                    //string s = "log-bb-2014-02-12-12-06-13-diag";
-                    var list=new List<string>();
-                    Regex r = new Regex(@"(\d+)[-.\/](\d+)[-.\/](\d+)");
-                    var x= from m in r.Matches(text).Cast<Match>()
-                           select m.Value;
-                    foreach (var date in x.ToList())
-                    {
-                        DateTime dateMatched;
-                        string dateStr;
-                        if (DateTime.TryParseExact(date, "dd/mm/yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateMatched))
+                        String line;
+                        while ((line = streamReader.ReadLine()) != null)
                         {
-                            dateStr = dateMatched.ToString("ddmmyyyy");
-                            text=text.Replace(date, dateStr);
-                            list.Add(dateStr);
+                            text = text + line;
                         }
-                        else
+                        var list = new List<string>();
+                        Regex r = new Regex(@"(\d+)[-.\/](\d+)[-.\/](\d+)");
+                        var x = from m in r.Matches(text).Cast<Match>()
+                            select m.Value;
+                        foreach (var date in x.ToList())
                         {
-                            if (DateTime.TryParseExact(date, "dd.mm.yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateMatched))
+                            DateTime dateMatched;
+                            string dateStr;
+                            if (DateTime.TryParseExact(date, "dd/mm/yy", CultureInfo.InvariantCulture,
+                                DateTimeStyles.None, out dateMatched))
                             {
                                 dateStr = dateMatched.ToString("ddmmyyyy");
                                 text = text.Replace(date, dateStr);
                                 list.Add(dateStr);
                             }
+                            else
+                            {
+                                if (DateTime.TryParseExact(date, "dd.mm.yy", CultureInfo.InvariantCulture,
+                                    DateTimeStyles.None, out dateMatched))
+                                {
+                                    dateStr = dateMatched.ToString("ddmmyyyy");
+                                    text = text.Replace(date, dateStr);
+                                    list.Add(dateStr);
+                                }
+                            }
+                        }
+
+                        string directoryName = Path.GetDirectoryName(fileName);
+                        var txtName = Path.GetFileName(fileName);
+                        directoryName = string.Format(@"{0}\(Formatted){1}", directoryName, txtName); //todo 
+                        if (!File.Exists(directoryName))
+                        {
+                            File.Create(directoryName).Dispose();
+                            TextWriter tw = new StreamWriter(directoryName);
+                            tw.Write(text);
+                            tw.Close();
+                        }
+                        else if (File.Exists(directoryName))
+                        {
+                            TextWriter tw = new StreamWriter(directoryName, false);
+                            tw.Write(text);
+                            tw.Close();
                         }
                     }
-                    string path = @"C:\Users\Roman\Desktop";
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    path = string.Format(@"C:\Work\UploadToTelelinkFiles\{0}.txt", 1); //todo 
-                    if (!File.Exists(path))
-                    {
-                        File.Create(path).Dispose();
-                        TextWriter tw = new StreamWriter(path);
-                        tw.Write(text);
-                        tw.Close();
-                    }
-                    else if (File.Exists(path))
-                    {
-                        TextWriter tw = new StreamWriter(path, false);
-                        tw.Write(text);
-                        tw.Close();
-                    }
-                    MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
                 }
+                MessageBox.Show(
+                    @"Документы на выгрузку изменены. Вы найдёте их в той же папке, где лежат оригиналы файлов.");
             }
-            
         }
     }
-    //Match m = r.Match(a.ToString());
-    //if (m.Success)
-    //{
-    //    string date = "";
-    //    DateTime dt = DateTime.ParseExact(m.Value, "dd/mm/yy", CultureInfo.CurrentCulture);
-    //    //var x=m.Value.ToString;
-    //    //date = date + x; 
-    //    //DateTime dt = DateTime.ParseExact(m.Value, "yyyy-MM-dd-hh-mm-ss", CultureInfo.InvariantCulture);
-
-    //}
-
-
-    //MessageBox.Show(text);
 }
