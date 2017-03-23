@@ -22,10 +22,15 @@ namespace ChangeDate
 
         private void pathButton_Click(object sender, EventArgs e)
         {
+            string startPath = @"C:\Work\Current";
             OpenFileDialog theDialog = new OpenFileDialog();
             theDialog.Title = "Выберите файл";
             theDialog.Filter = "TXT files|*.txt";
-            theDialog.InitialDirectory = @"C:\";
+            if (!Directory.Exists(startPath))
+            {
+                startPath = @"C:\";
+            }
+            theDialog.InitialDirectory = startPath;
             theDialog.Multiselect = true;
             string text = "";
             if (theDialog.ShowDialog() == DialogResult.OK)
@@ -71,7 +76,7 @@ namespace ChangeDate
 
                     string directoryName = Path.GetDirectoryName(fileName);
                     var txtName = Path.GetFileName(fileName);
-                    directoryName = string.Format(@"{0}\(Formatted){1}", directoryName, txtName); //todo 
+                    directoryName = string.Format(@"{0}\{1}", directoryName, txtName); //todo 
                     if (!File.Exists(directoryName))
                     {
                         File.Create(directoryName).Dispose();
