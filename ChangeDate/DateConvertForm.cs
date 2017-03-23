@@ -27,7 +27,7 @@ namespace ChangeDate
             theDialog.Filter = "TXT files|*.txt";
             theDialog.InitialDirectory = @"C:\";
             theDialog.Multiselect = true;
-            var text = "";
+            string text = "";
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
                 var fileNames = theDialog.FileNames;
@@ -37,54 +37,55 @@ namespace ChangeDate
                     using (var fileStream = File.OpenRead(fileName))
                     using (var streamReader = new StreamReader(fileStream, Encoding.Default, true, BufferSize))
                     {
-                        String line;
-                        while ((line = streamReader.ReadLine()) != null)
-                        {
-                            text = text + line;
-                        }
-                        var list = new List<string>();
-                        Regex r = new Regex(@"(\d+)[-.\/](\d+)[-.\/](\d+)");
-                        var x = from m in r.Matches(text).Cast<Match>()
+                        //String line;
+                        //while ((line = streamReader.ReadLine()) != null)
+                        //{
+                        //    text = text + line;
+                        //}
+                        //var list = new List<string>();
+                        text = streamReader.ReadToEnd();
+                    }
+                    Regex r = new Regex(@"(\d+)[-.\/](\d+)[-.\/](\d+)");
+                    var x = from m in r.Matches(text).Cast<Match>()
                             select m.Value;
-                        foreach (var date in x.ToList())
+                    foreach (var date in x.ToList())
+                    {
+                        DateTime dateMatched;
+                        string dateStr;
+                        if (DateTime.TryParseExact(date, "dd/mm/yy", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out dateMatched))
                         {
-                            DateTime dateMatched;
-                            string dateStr;
-                            if (DateTime.TryParseExact(date, "dd/mm/yy", CultureInfo.InvariantCulture,
+                            dateStr = dateMatched.ToString("ddmmyyyy");
+                            text = text.Replace(date, dateStr);
+                        }
+                        else
+                        {
+                            if (DateTime.TryParseExact(date, "dd.mm.yy", CultureInfo.InvariantCulture,
                                 DateTimeStyles.None, out dateMatched))
                             {
                                 dateStr = dateMatched.ToString("ddmmyyyy");
                                 text = text.Replace(date, dateStr);
-                                list.Add(dateStr);
-                            }
-                            else
-                            {
-                                if (DateTime.TryParseExact(date, "dd.mm.yy", CultureInfo.InvariantCulture,
-                                    DateTimeStyles.None, out dateMatched))
-                                {
-                                    dateStr = dateMatched.ToString("ddmmyyyy");
-                                    text = text.Replace(date, dateStr);
-                                    list.Add(dateStr);
-                                }
                             }
                         }
+                    }
 
-                        string directoryName = Path.GetDirectoryName(fileName);
-                        var txtName = Path.GetFileName(fileName);
-                        directoryName = string.Format(@"{0}\(Formatted){1}", directoryName, txtName); //todo 
-                        if (!File.Exists(directoryName))
-                        {
-                            File.Create(directoryName).Dispose();
-                            TextWriter writer = new StreamWriter(directoryName);
-                            writer.Write(text);
-                            writer.Close();
-                        }
-                        else if (File.Exists(directoryName))
-                        {
-                            TextWriter tw = new StreamWriter(directoryName, false);
-                            tw.Write(text);
-                            tw.Close();
-                        }
+                    string directoryName = Path.GetDirectoryName(fileName);
+                    var txtName = Path.GetFileName(fileName);
+                    directoryName = string.Format(@"{0}\(Formatted){1}", directoryName, txtName); //todo 
+                    if (!File.Exists(directoryName))
+                    {
+                        File.Create(directoryName).Dispose();
+                        TextWriter writer = new StreamWriter(directoryName);
+                        writer.Write(text);
+                        writer.Close();
+                        text = "";
+                    }
+                    else if (File.Exists(directoryName))
+                    {
+                        TextWriter tw = new StreamWriter(directoryName, false);
+                        tw.Write(text);
+                        tw.Close();
+                        text = "";
                     }
                 }
                 MessageBox.Show(
