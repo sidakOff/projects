@@ -59,6 +59,7 @@ namespace ReportTesting
             {
                 using (var dataAdapter = new SqlDataAdapter(command))
                     dataAdapter.Fill(results);
+
             }
             return results;
         }
