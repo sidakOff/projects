@@ -1,0 +1,17 @@
+C:\Git\ReportTesting\ReportTesting\bin\Debug\ReportTesting.exe.config
+C:\Git\ReportTesting\ReportTesting\bin\Debug\ReportTesting.exe
+C:\Git\ReportTesting\ReportTesting\bin\Debug\ReportTesting.pdb
+C:\Git\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Git\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+C:\Git\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csprojResolveAssemblyReference.cache
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.Properties.Resources.resources
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csproj.GenerateResource.Cache
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.exe
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.pdb
+C:\Git\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Git\ReportTesting\ReportTesting\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csproj.ReportTesting.exe.config
+C:\Git\ReportTesting\ReportTesting\obj\Debug\RdlCompile.cache
+C:\Git\ReportTesting\ReportTesting\obj\Debug\RdlCompile.compiled
+C:\Git\ReportTesting\ReportTesting\obj\Debug\ReportTesting.ReportsForm.resources

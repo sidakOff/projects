@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AccountDataSet" targetNamespace="http://tempuri.org/AccountDataSet.xsd" xmlns:mstns="http://tempuri.org/AccountDataSet.xsd" xmlns="http://tempuri.org/AccountDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AccountDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="AccountDataSet" msprop:Generator_UserDSName="AccountDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AccountDataTable" msprop:Generator_TableClassName="AccountDataTableDataTable" msprop:Generator_TableVarName="tableAccountDataTable" msprop:Generator_RowChangedName="AccountDataTableRowChanged" msprop:Generator_TablePropName="AccountDataTable" msprop:Generator_RowDeletingName="AccountDataTableRowDeleting" msprop:Generator_RowChangingName="AccountDataTableRowChanging" msprop:Generator_RowEvHandlerName="AccountDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="AccountDataTableRowDeleted" msprop:Generator_RowClassName="AccountDataTableRow" msprop:Generator_UserTableName="AccountDataTable" msprop:Generator_RowEvArgName="AccountDataTableRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AccountId" msprop:Generator_ColumnVarNameInTable="columnAccountId" msprop:Generator_ColumnPropNameInRow="AccountId" msprop:Generator_ColumnPropNameInTable="AccountIdColumn" msprop:Generator_UserColumnName="AccountId" type="xs:int" minOccurs="0" />
+              <xs:element name="StatementId" msprop:Generator_ColumnVarNameInTable="columnStatementId" msprop:Generator_ColumnPropNameInRow="StatementId" msprop:Generator_ColumnPropNameInTable="StatementIdColumn" msprop:Generator_UserColumnName="StatementId" type="xs:int" minOccurs="0" />
+              <xs:element name="PaymentAccount" msprop:Generator_ColumnVarNameInTable="columnPaymentAccount" msprop:Generator_ColumnPropNameInRow="PaymentAccount" msprop:Generator_ColumnPropNameInTable="PaymentAccountColumn" msprop:Generator_UserColumnName="PaymentAccount" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyId" msprop:Generator_ColumnVarNameInTable="columnCompanyId" msprop:Generator_ColumnPropNameInRow="CompanyId" msprop:Generator_ColumnPropNameInTable="CompanyIdColumn" msprop:Generator_UserColumnName="CompanyId" type="xs:int" minOccurs="0" />
+              <xs:element name="DateBegin" msprop:Generator_ColumnVarNameInTable="columnDateBegin" msprop:Generator_ColumnPropNameInRow="DateBegin" msprop:Generator_ColumnPropNameInTable="DateBeginColumn" msprop:Generator_UserColumnName="DateBegin" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateEnd" msprop:Generator_ColumnVarNameInTable="columnDateEnd" msprop:Generator_ColumnPropNameInRow="DateEnd" msprop:Generator_ColumnPropNameInTable="DateEndColumn" msprop:Generator_UserColumnName="DateEnd" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ClosingBalance" msprop:Generator_ColumnVarNameInTable="columnClosingBalance" msprop:Generator_ColumnPropNameInRow="ClosingBalance" msprop:Generator_ColumnPropNameInTable="ClosingBalanceColumn" msprop:Generator_UserColumnName="ClosingBalance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BankName" msprop:Generator_ColumnVarNameInTable="columnBankName" msprop:Generator_ColumnPropNameInRow="BankName" msprop:Generator_ColumnPropNameInTable="BankNameColumn" msprop:Generator_UserColumnName="BankName" type="xs:string" minOccurs="0" />
+              <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType" type="xs:string" minOccurs="0" />
+              <xs:element name="AccountFormat" msprop:Generator_ColumnVarNameInTable="columnAccountFormat" msprop:Generator_ColumnPropNameInRow="AccountFormat" msprop:Generator_ColumnPropNameInTable="AccountFormatColumn" msprop:Generator_UserColumnName="AccountFormat" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
