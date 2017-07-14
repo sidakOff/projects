@@ -51,6 +51,7 @@ namespace ReportTesting
                     FROM dic_CourseRate
                     WHERE iCurrencyID IN (2, 176)
                     ORDER BY dtDate DESC";
+#if DEBUG
             using (var conn = new SqlConnection(Settings.Default.TEKConnectionString))
             using (var command = new SqlCommand(query, conn)
             {
@@ -59,8 +60,19 @@ namespace ReportTesting
             {
                 using (var dataAdapter = new SqlDataAdapter(command))
                     dataAdapter.Fill(results);
-
             }
+#else
+            using (var conn = new SqlConnection(Settings.Default.EKGTEKConnectionString))
+            using (var command = new SqlCommand(query, conn)
+            {
+                CommandType = CommandType.Text
+            })
+            {
+                using (var dataAdapter = new SqlDataAdapter(command))
+                    dataAdapter.Fill(results);
+            }
+#endif
+
             return results;
         }
     }

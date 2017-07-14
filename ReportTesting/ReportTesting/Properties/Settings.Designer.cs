@@ -33,5 +33,16 @@ namespace ReportTesting.Properties {
                 return ((string)(this["TEKConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.24.tektn.ton.ru\\sql2008;Initial Catalog=TEK;User ID=adminis" +
+            "trator;Password=qwopqwop")]
+        public string EKGTEKConnectionString {
+            get {
+                return ((string)(this["EKGTEKConnectionString"]));
+            }
+        }
     }
 }

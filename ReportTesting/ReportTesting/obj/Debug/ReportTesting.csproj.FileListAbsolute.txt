@@ -22,7 +22,6 @@ C:\GitHub\ReportTesting\ReportTesting\bin\Debug\ReportTesting.exe
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\ReportTesting.pdb
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.Common.dll
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL
-C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csprojResolveAssemblyReference.cache
@@ -32,3 +31,4 @@ C:\GitHub\ReportTesting\ReportTesting\obj\Debug\ReportTesting.Properties.Resourc
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csproj.GenerateResource.Cache
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\RdlCompile.cache
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\RdlCompile.compiled
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
