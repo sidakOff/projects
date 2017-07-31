@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.AccountDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AccountDataSet = new ReportTesting.AccountDataSet();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -47,10 +47,11 @@
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.loadDataButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.eurLabel = new System.Windows.Forms.Label();
+            this.usdLabelVal = new System.Windows.Forms.Label();
             this.usdLabel = new System.Windows.Forms.Label();
             this.eurLabelVal = new System.Windows.Forms.Label();
-            this.usdLabelVal = new System.Windows.Forms.Label();
+            this.eurLabel = new System.Windows.Forms.Label();
+            this.getCourseDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.accountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accountDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accountDataTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -154,9 +155,9 @@
             // accountReportViewer
             // 
             this.accountReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "AccountDT";
-            reportDataSource1.Value = this.AccountDataTableBindingSource;
-            this.accountReportViewer.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "AccountDT";
+            reportDataSource2.Value = this.AccountDataTableBindingSource;
+            this.accountReportViewer.LocalReport.DataSources.Add(reportDataSource2);
             this.accountReportViewer.LocalReport.ReportEmbeddedResource = "ReportTesting.Report2.rdlc";
             this.accountReportViewer.Location = new System.Drawing.Point(3, 3);
             this.accountReportViewer.Name = "accountReportViewer";
@@ -241,34 +242,37 @@
             // 
             this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel3.Controls.Add(this.eurLabel, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.usdLabel, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.eurLabelVal, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.usdLabelVal, 3, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(171, 33);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.usdLabelVal, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.usdLabel, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.eurLabelVal, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.eurLabel, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.getCourseDateTimePicker, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 33);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(318, 24);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(486, 24);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
-            // eurLabel
+            // usdLabelVal
             // 
-            this.eurLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.usdLabelVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.eurLabel.AutoSize = true;
-            this.eurLabel.Location = new System.Drawing.Point(3, 0);
-            this.eurLabel.Name = "eurLabel";
-            this.eurLabel.Size = new System.Drawing.Size(74, 24);
-            this.eurLabel.TabIndex = 0;
-            this.eurLabel.Text = "Евро";
-            this.eurLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.usdLabelVal.AutoSize = true;
+            this.usdLabelVal.Location = new System.Drawing.Point(403, 0);
+            this.usdLabelVal.Name = "usdLabelVal";
+            this.usdLabelVal.Size = new System.Drawing.Size(80, 24);
+            this.usdLabelVal.TabIndex = 3;
+            this.usdLabelVal.Text = "бакс";
+            this.usdLabelVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // usdLabel
             // 
@@ -276,7 +280,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.usdLabel.AutoSize = true;
-            this.usdLabel.Location = new System.Drawing.Point(163, 0);
+            this.usdLabel.Location = new System.Drawing.Point(323, 0);
             this.usdLabel.Name = "usdLabel";
             this.usdLabel.Size = new System.Drawing.Size(74, 24);
             this.usdLabel.TabIndex = 1;
@@ -289,25 +293,33 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.eurLabelVal.AutoSize = true;
-            this.eurLabelVal.Location = new System.Drawing.Point(83, 0);
+            this.eurLabelVal.Location = new System.Drawing.Point(243, 0);
             this.eurLabelVal.Name = "eurLabelVal";
             this.eurLabelVal.Size = new System.Drawing.Size(74, 24);
             this.eurLabelVal.TabIndex = 2;
             this.eurLabelVal.Text = "евро";
             this.eurLabelVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // usdLabelVal
+            // eurLabel
             // 
-            this.usdLabelVal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.eurLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.usdLabelVal.AutoSize = true;
-            this.usdLabelVal.Location = new System.Drawing.Point(243, 0);
-            this.usdLabelVal.Name = "usdLabelVal";
-            this.usdLabelVal.Size = new System.Drawing.Size(74, 24);
-            this.usdLabelVal.TabIndex = 3;
-            this.usdLabelVal.Text = "бакс";
-            this.usdLabelVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.eurLabel.AutoSize = true;
+            this.eurLabel.Location = new System.Drawing.Point(163, 0);
+            this.eurLabel.Name = "eurLabel";
+            this.eurLabel.Size = new System.Drawing.Size(74, 24);
+            this.eurLabel.TabIndex = 0;
+            this.eurLabel.Text = "Евро";
+            this.eurLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // getCourseDateTimePicker
+            // 
+            this.getCourseDateTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.getCourseDateTimePicker.Location = new System.Drawing.Point(3, 3);
+            this.getCourseDateTimePicker.Name = "getCourseDateTimePicker";
+            this.getCourseDateTimePicker.Size = new System.Drawing.Size(154, 20);
+            this.getCourseDateTimePicker.TabIndex = 4;
             // 
             // accountDataSetBindingSource
             // 
@@ -375,6 +387,7 @@
         private System.Windows.Forms.Label usdLabel;
         private System.Windows.Forms.Label eurLabelVal;
         private System.Windows.Forms.Label usdLabelVal;
+        private System.Windows.Forms.DateTimePicker getCourseDateTimePicker;
     }
 }
 

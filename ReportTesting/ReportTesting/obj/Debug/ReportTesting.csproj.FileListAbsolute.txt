@@ -32,3 +32,14 @@ C:\GitHub\ReportTesting\ReportTesting\obj\Debug\ReportTesting.csproj.GenerateRes
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\RdlCompile.cache
 C:\GitHub\ReportTesting\ReportTesting\obj\Debug\RdlCompile.compiled
 C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.ReportViewer.WebForms.DLL
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\Microsoft.CSharp.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Data.DataSetExtensions.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Data.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Deployment.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Drawing.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Net.Http.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Web.Services.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Windows.Forms.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Xml.dll
+C:\GitHub\ReportTesting\ReportTesting\bin\Debug\System.Xml.Linq.dll

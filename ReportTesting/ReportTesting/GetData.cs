@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using ReportTesting.Properties;
 
@@ -39,18 +40,18 @@ namespace ReportTesting
             return results;
         }
 
-        public static DataTable GetCourse()
+        public static DataTable GetCourse(string date)
         {
             var results = new DataTable();
-            string query =
-                @"SELECT TOP 2
-                      iCourseID AS CourseId,
-                      dtDate AS Date,
-                      iCurrencyID AS CurrencyId,
-                      mRate AS Rate
-                    FROM dic_CourseRate
-                    WHERE iCurrencyID IN (2, 176)
-                    ORDER BY dtDate DESC";
+            string query = string.Format(@"
+                       SELECT
+                         iCourseID   AS CourseId,
+                         dtDate      AS Date,
+                         iCurrencyID AS CurrencyId,
+                         mRate       AS Rate
+                       FROM dic_CourseRate
+                       WHERE iCurrencyID IN (2, 176) AND dtDate = '{0}'
+                       ORDER BY dtDate DESC", date);
 #if DEBUG
             using (var conn = new SqlConnection(Settings.Default.TEKConnectionString))
             using (var command = new SqlCommand(query, conn)

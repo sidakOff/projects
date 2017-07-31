@@ -74,10 +74,10 @@ namespace ReportTesting
             return lst;
         }
 
-        public static List<CourseRate> FillRate()
+        public static List<CourseRate> FillRate(string date)
         {
             var courseRates=new List<CourseRate>();
-            var rates = GetData.GetCourse().Rows;
+            var rates = GetData.GetCourse(date).Rows;
             foreach (DataRow dataRow in rates)
             {
                 var courseRate=new CourseRate()

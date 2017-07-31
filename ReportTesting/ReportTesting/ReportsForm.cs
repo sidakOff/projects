@@ -17,11 +17,18 @@ namespace ReportTesting
         private List<CourseRate> courseRates;
         private decimal usd;
         private decimal eur;
+        private static string dateCourse;
 
         public ReportsForm()
         {
             InitializeComponent();
-            courseRates = Fill.FillRate();
+            GetCourseToDate();
+        }
+
+        private void GetCourseToDate()
+        {
+            dateCourse = getCourseDateTimePicker.Value.ToShortDateString();
+            courseRates = Fill.FillRate(dateCourse);
             usd = courseRates.FirstOrDefault(o => o.CurrencyId == 2).Rate;
             eur = courseRates.FirstOrDefault(o => o.CurrencyId == 176).Rate;
             eurLabelVal.Text = eur.ToString();
@@ -30,6 +37,7 @@ namespace ReportTesting
 
         private void loadDataButton_Click(object sender, EventArgs e)
         {
+            GetCourseToDate();
             dateBegin = beginDateTimePicker.Value;
             dateEnd = endDateTimePicker.Value;
             GetAccountValues();
@@ -89,6 +97,7 @@ namespace ReportTesting
         private void ReportsForm_Load(object sender, EventArgs e)
         {
             this.accountReportViewer.RefreshReport();
+            getCourseDateTimePicker.Value=DateTime.Now;
         }
     }
 }
