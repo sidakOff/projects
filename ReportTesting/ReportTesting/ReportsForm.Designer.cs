@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             this.AccountDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AccountDataSet = new ReportTesting.AccountDataSet();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -155,9 +156,9 @@
             // accountReportViewer
             // 
             this.accountReportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource2.Name = "AccountDT";
-            reportDataSource2.Value = this.AccountDataTableBindingSource;
-            this.accountReportViewer.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "AccountDT";
+            reportDataSource1.Value = this.AccountDataTableBindingSource;
+            this.accountReportViewer.LocalReport.DataSources.Add(reportDataSource1);
             this.accountReportViewer.LocalReport.ReportEmbeddedResource = "ReportTesting.Report2.rdlc";
             this.accountReportViewer.Location = new System.Drawing.Point(3, 3);
             this.accountReportViewer.Name = "accountReportViewer";
@@ -337,6 +338,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 961);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ReportsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
