@@ -2,9 +2,9 @@
 
 namespace MultiThreadTest
 {
-    public partial class ForTestForm : Form
+    public partial class MultiThreadTestForm : Form
     {
-        public ForTestForm()
+        public MultiThreadTestForm()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace MultiThreadTest
 {
-    partial class ForTestForm
+    partial class MultiThreadTestForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // ForTestForm
+            // MultiThreadTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 286);
-            this.Name = "ForTestForm";
+            this.Name = "MultiThreadTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тестирую многопоточность";
             this.ResumeLayout(false);
