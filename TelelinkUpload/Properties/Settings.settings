@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnecitionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=10.100.11.15\SQL2008R2;Initial Catalog= EKG;User ID=sa;Password=Sli47Mn</Value>
+      <Value Profile="(Default)">Data Source=10.100.11.15\SQL2008R2;Initial Catalog= EKG;User ID=telelinkUpl;Password=Last1element</Value>
     </Setting>
   </Settings>
 </SettingsFile>

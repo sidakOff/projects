@@ -12,7 +12,7 @@ namespace TelelinkUpload.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,8 +25,8 @@ namespace TelelinkUpload.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.100.11.15\\SQL2008R2;Initial Catalog= EKG;User ID=sa;Password=Sli47" +
-            "Mn")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.100.11.15\\SQL2008R2;Initial Catalog= EKG;User ID=telelinkUpl;Passw" +
+            "ord=Last1element")]
         public string ConnecitionString {
             get {
                 return ((string)(this["ConnecitionString"]));
