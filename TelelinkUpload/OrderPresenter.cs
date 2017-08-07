@@ -86,12 +86,12 @@ namespace TelelinkUpload
 
         private static bool CompareOrders(Order firstOrder, Order order)
         {
-            var e=new CompareLogic();
-            e.Config= new ComparisonConfig
+            var compareLogic=new CompareLogic();
+            compareLogic.Config= new ComparisonConfig
             {
                 MembersToIgnore = new List<string> { "summ", "paymentDestination" }
             };
-            var result=e.Compare(firstOrder, order).AreEqual;
+            var result=compareLogic.Compare(firstOrder, order).AreEqual;
             
             return result;
         }
@@ -112,15 +112,15 @@ namespace TelelinkUpload
             if (!File.Exists(path))
             {
                 File.Create(path).Dispose();
-                TextWriter tw = new StreamWriter(path);
-                tw.Write(upload);
-                tw.Close();
+                TextWriter textWriter = new StreamWriter(path);
+                textWriter.Write(upload);
+                textWriter.Close();
             }
             else if (File.Exists(path))
             {
-                TextWriter tw = new StreamWriter(path, false);
-                tw.Write(upload);
-                tw.Close();
+                TextWriter textWriter = new StreamWriter(path, false);
+                textWriter.Write(upload);
+                textWriter.Close();
             }
             MessageBox.Show(@"Всё пучком и выгрузилось в папку C:\Work\UploadToTelelinkFiles");
         }
@@ -132,18 +132,6 @@ namespace TelelinkUpload
         /// <returns></returns>
         private static Order PrepareValues(Order order)
         {
-            //if (!string.IsNullOrEmpty(order.countryBeneficiar))
-            //{
-            //    order.countryBeneficiar = string.Format(order.countryBeneficiar).Remove(2);
-            //}
-            //if (!string.IsNullOrEmpty(order.countryBeneficiarBank))
-            //{
-            //    order.countryBeneficiarBank = string.Format(order.countryBeneficiarBank).Remove(2);
-            //}
-            //if (!string.IsNullOrEmpty(order.countryCorrespondent))
-            //{
-            //    order.countryCorrespondent = string.Format(order.countryCorrespondent).Remove(2);
-            //}
             if (!string.IsNullOrEmpty(order.payerAccountIban))
             {
                 order.payerAccountIban = string.Format(order.payerAccountIban).Replace(" ", "");
