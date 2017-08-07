@@ -86,13 +86,13 @@ namespace TelelinkUpload
 
         private static bool CompareOrders(Order firstOrder, Order order)
         {
-            var compareLogic=new CompareLogic();
-            compareLogic.Config= new ComparisonConfig
+            var compareLogic = new CompareLogic();
+            compareLogic.Config = new ComparisonConfig
             {
-                MembersToIgnore = new List<string> { "summ", "paymentDestination" }
+                MembersToIgnore = new List<string> {"summ", "paymentDestination"}
             };
-            var result=compareLogic.Compare(firstOrder, order).AreEqual;
-            
+            var result = compareLogic.Compare(firstOrder, order).AreEqual;
+
             return result;
         }
 
