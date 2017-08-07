@@ -32,7 +32,6 @@
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             this.AccountDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.AccountDataSet = new ReportTesting.AccountDataSet();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,31 +52,16 @@
             this.eurLabelVal = new System.Windows.Forms.Label();
             this.eurLabel = new System.Windows.Forms.Label();
             this.getCourseDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.accountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.accountDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.accountDataTableBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.AccountDataSet = new ReportTesting.AccountDataSet();
             ((System.ComponentModel.ISupportInitialize)(this.AccountDataTableBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AccountDataSet)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.reportsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountDataTableBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AccountDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // AccountDataTableBindingSource
-            // 
-            this.AccountDataTableBindingSource.DataMember = "AccountDataTable";
-            this.AccountDataTableBindingSource.DataSource = this.AccountDataSet;
-            // 
-            // AccountDataSet
-            // 
-            this.AccountDataSet.DataSetName = "AccountDataSet";
-            this.AccountDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tableLayoutPanel1
             // 
@@ -322,15 +306,10 @@
             this.getCourseDateTimePicker.Size = new System.Drawing.Size(154, 20);
             this.getCourseDateTimePicker.TabIndex = 4;
             // 
-            // accountDataSetBindingSource
+            // AccountDataSet
             // 
-            this.accountDataSetBindingSource.DataSource = this.AccountDataSet;
-            this.accountDataSetBindingSource.Position = 0;
-            // 
-            // accountDataTableBindingSource1
-            // 
-            this.accountDataTableBindingSource1.DataMember = "AccountDataTable";
-            this.accountDataTableBindingSource1.DataSource = this.AccountDataSet;
+            this.AccountDataSet.DataSetName = "AccountDataSet";
+            this.AccountDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ReportsForm
             // 
@@ -345,7 +324,6 @@
             this.Text = "Отчётность";
             this.Load += new System.EventHandler(this.ReportsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AccountDataTableBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AccountDataSet)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -356,9 +334,7 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.accountBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.accountDataTableBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AccountDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -379,17 +355,14 @@
         private System.Windows.Forms.Button loadDataButton;
         private System.Windows.Forms.TabPage tabPage1;
         private Microsoft.Reporting.WinForms.ReportViewer accountReportViewer;
-        private System.Windows.Forms.BindingSource accountBindingSource;
         private System.Windows.Forms.BindingSource AccountDataTableBindingSource;
-        private AccountDataSet AccountDataSet;
-        private System.Windows.Forms.BindingSource accountDataSetBindingSource;
-        private System.Windows.Forms.BindingSource accountDataTableBindingSource1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label eurLabel;
         private System.Windows.Forms.Label usdLabel;
         private System.Windows.Forms.Label eurLabelVal;
         private System.Windows.Forms.Label usdLabelVal;
         private System.Windows.Forms.DateTimePicker getCourseDateTimePicker;
+        private AccountDataSet AccountDataSet;
     }
 }
 

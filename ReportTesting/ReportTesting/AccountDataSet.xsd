@@ -26,6 +26,7 @@
               <xs:element name="BankName" msprop:Generator_ColumnVarNameInTable="columnBankName" msprop:Generator_ColumnPropNameInRow="BankName" msprop:Generator_ColumnPropNameInTable="BankNameColumn" msprop:Generator_UserColumnName="BankName" type="xs:string" minOccurs="0" />
               <xs:element name="AccountType" msprop:Generator_ColumnVarNameInTable="columnAccountType" msprop:Generator_ColumnPropNameInRow="AccountType" msprop:Generator_ColumnPropNameInTable="AccountTypeColumn" msprop:Generator_UserColumnName="AccountType" type="xs:string" minOccurs="0" />
               <xs:element name="AccountFormat" msprop:Generator_ColumnVarNameInTable="columnAccountFormat" msprop:Generator_ColumnPropNameInRow="AccountFormat" msprop:Generator_ColumnPropNameInTable="AccountFormatColumn" msprop:Generator_UserColumnName="AccountFormat" type="xs:int" minOccurs="0" />
+              <xs:element name="ClosingBalanceDefRur" msprop:Generator_ColumnVarNameInTable="columnClosingBalanceDefRur" msprop:Generator_ColumnPropNameInRow="ClosingBalanceDefRur" msprop:Generator_ColumnPropNameInTable="ClosingBalanceDefRurColumn" msprop:Generator_UserColumnName="ClosingBalanceDefRur" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

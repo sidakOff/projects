@@ -301,6 +301,8 @@ namespace ReportTesting {
             
             private global::System.Data.DataColumn columnAccountFormat;
             
+            private global::System.Data.DataColumn columnClosingBalanceDefRur;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public AccountDataTableDataTable() {
@@ -424,6 +426,14 @@ namespace ReportTesting {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ClosingBalanceDefRurColumn {
+                get {
+                    return this.columnClosingBalanceDefRur;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace ReportTesting {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AccountDataTableRow AddAccountDataTableRow(int AccountId, int StatementId, string PaymentAccount, string CompanyName, int CompanyId, System.DateTime DateBegin, System.DateTime DateEnd, decimal ClosingBalance, string BankName, string AccountType, int AccountFormat) {
+            public AccountDataTableRow AddAccountDataTableRow(int AccountId, int StatementId, string PaymentAccount, string CompanyName, int CompanyId, System.DateTime DateBegin, System.DateTime DateEnd, decimal ClosingBalance, string BankName, string AccountType, int AccountFormat, decimal ClosingBalanceDefRur) {
                 AccountDataTableRow rowAccountDataTableRow = ((AccountDataTableRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         AccountId,
@@ -472,7 +482,8 @@ namespace ReportTesting {
                         ClosingBalance,
                         BankName,
                         AccountType,
-                        AccountFormat};
+                        AccountFormat,
+                        ClosingBalanceDefRur};
                 rowAccountDataTableRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAccountDataTableRow);
                 return rowAccountDataTableRow;
@@ -506,6 +517,7 @@ namespace ReportTesting {
                 this.columnBankName = base.Columns["BankName"];
                 this.columnAccountType = base.Columns["AccountType"];
                 this.columnAccountFormat = base.Columns["AccountFormat"];
+                this.columnClosingBalanceDefRur = base.Columns["ClosingBalanceDefRur"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -533,6 +545,8 @@ namespace ReportTesting {
                 base.Columns.Add(this.columnAccountType);
                 this.columnAccountFormat = new global::System.Data.DataColumn("AccountFormat", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAccountFormat);
+                this.columnClosingBalanceDefRur = new global::System.Data.DataColumn("ClosingBalanceDefRur", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClosingBalanceDefRur);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -851,6 +865,23 @@ namespace ReportTesting {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal ClosingBalanceDefRur {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableAccountDataTable.ClosingBalanceDefRurColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'ClosingBalanceDefRur\' в таблице \'AccountDataTable\' равно DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tableAccountDataTable.ClosingBalanceDefRurColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAccountIdNull() {
                 return this.IsNull(this.tableAccountDataTable.AccountIdColumn);
             }
@@ -979,6 +1010,18 @@ namespace ReportTesting {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAccountFormatNull() {
                 this[this.tableAccountDataTable.AccountFormatColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsClosingBalanceDefRurNull() {
+                return this.IsNull(this.tableAccountDataTable.ClosingBalanceDefRurColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetClosingBalanceDefRurNull() {
+                this[this.tableAccountDataTable.ClosingBalanceDefRurColumn] = global::System.Convert.DBNull;
             }
         }
         

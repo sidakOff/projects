@@ -52,7 +52,7 @@ namespace ReportTesting
             {
                 accountDataSet.Tables[0].Rows.Add(account.AccountId, account.StatementId, account.PaymentAccount,
                     account.CompanyName, account.CompanyId, account.DateBegin, account.DateEnd, account.ClosingBalance,
-                    account.BankName, account.AccountType, account.AccountFormat);
+                    account.BankName, account.AccountType, account.AccountFormat, account.ClosingBalanceDefRur);
             }
             ReportDataSource rds = new ReportDataSource("AccountDT", accountDataSet.Tables[0]);
             this.accountReportViewer.LocalReport.DataSources.Clear();

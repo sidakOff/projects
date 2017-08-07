@@ -19,6 +19,7 @@ namespace ReportTesting
         public string BankName { get; set; }
         public string AccountType { get; set; }
         public int AccountFormat { get; set; }
-        
+        public decimal? ClosingBalanceDefRur { get; set; }
+
     }
 }
