@@ -63,7 +63,7 @@ namespace ReportTesting
                     dataAdapter.Fill(results);
             }
 #else
-            using (var conn = new SqlConnection(Settings.Default.EKGTEKConnectionString))
+            using (var conn = new SqlConnection(Settings.Default.TEKConnectionString))
             using (var command = new SqlCommand(query, conn)
             {
                 CommandType = CommandType.Text

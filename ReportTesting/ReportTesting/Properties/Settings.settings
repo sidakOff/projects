@@ -5,17 +5,16 @@
     <Setting Name="TEKConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=192.168.1.24\sql2008;Initial Catalog=TEK;User ID=administrator;Password=qwopqwop&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=192.168.1.24\sql2008;Initial Catalog=TEK;User ID=administrator;Password=qwopqwop</Value>
-    </Setting>
-    <Setting Name="EKGTEKConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;ConnectionString&gt;Data Source=192.168.1.24\sql2008;Initial Catalog=TEK;User ID=report;Password=First1element&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=192.168.1.24\sql2008;Initial Catalog=TEK;User ID=report;Password=First1element</Value>
+    </Setting>
+    <Setting Name="EKGConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=10.100.11.15\sql2008R2;Initial Catalog=EKG;User ID=administrator;Password=qwopqwop&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=10.100.11.15\sql2008R2;Initial Catalog=EKG;User ID=administrator;Password=qwopqwop</Value>
     </Setting>
   </Settings>
 </SettingsFile>

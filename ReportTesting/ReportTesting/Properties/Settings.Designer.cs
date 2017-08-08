@@ -26,8 +26,8 @@ namespace ReportTesting.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.24\\sql2008;Initial Catalog=TEK;User ID=administrator;Passwo" +
-            "rd=qwopqwop")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.24\\sql2008;Initial Catalog=TEK;User ID=report;Password=Firs" +
+            "t1element")]
         public string TEKConnectionString {
             get {
                 return ((string)(this["TEKConnectionString"]));
@@ -37,11 +37,11 @@ namespace ReportTesting.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.24\\sql2008;Initial Catalog=TEK;User ID=report;Password=Firs" +
-            "t1element")]
-        public string EKGTEKConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.100.11.15\\sql2008R2;Initial Catalog=EKG;User ID=administrator;Pass" +
+            "word=qwopqwop")]
+        public string EKGConnectionString {
             get {
-                return ((string)(this["EKGTEKConnectionString"]));
+                return ((string)(this["EKGConnectionString"]));
             }
         }
     }
