@@ -215,7 +215,7 @@ namespace TelelinkUpload
                 c.vcCodeAlpha2 as ReceiverCompanyCountryCodeAlpha3,
                 ord.vcReceiverCompanyAddressEng as ReceiverCompanyAddressEng,
                 ord.vcReceiverAccountIban as ReceiverAccountIban,
-                ord.vcReceiverAccount as ReceiverAccount,
+                replace(ord.vcReceiverAccount, ' ','') as ReceiverAccount,
                 ord.vcReceiverBankSwiftCode as ReceiverBankSwiftCode,
                 ord.vcReceiverBankNameEng as ReceiverBankNameEng,
                 c1.vcCodeAlpha2 as ReceiverBankCountryCodeAlpha3,
